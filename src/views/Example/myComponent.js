@@ -1,40 +1,47 @@
 import React from "react";
+import ChildComponent from "./childComponent";
 
 class MyComponent extends React.Component {
     /*
     JSX => return block
     */
     state = {
-        name: "Tai",
-        channel: "TaiPhung",
+        firstName: "",
+        lastName: ""
     }
 
-    handleOnChangeName = (event) => {
+    handleChangeFirstName = (event) => {
         this.setState({
-            name: event.target.value
+            firstName: event.target.value,
         })
     }
 
-    handleOnClick = () => {
-        alert("Thanks you!");
+    handleChangeLastName = (event) => {
+        this.setState({
+            lastName: event.target.value,
+        })
     }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        console.log('>>> check data input: ', this.state)
+    }
+
     render() {
         return (
             <>
-                <div className="first">
-                    <input value={this.state.name} type="text"
-                        onChange={(event) => this.handleOnChangeName(event)}
-                    />
-                    My name is {this.state.name}
-                </div>
-                <div className="second">
-                    This is my channel's name {this.state.channel}
-                </div>
-                <div className="third">
-                    <button onClick={() => this.handleOnClick()}> 
-                        Click me
-                    </button>
-                </div>
+                <form>
+                    <label htmlFor="fname">First name:</label><br />
+                    <input type="text" value={this.state.firstName}
+                        onChange={(event) => this.handleChangeFirstName(event)} /><br />
+                    <label htmlFor="lname">Last name:</label><br />
+                    <input type="text" value={this.state.lastName}
+                        onChange={(event) => this.handleChangeLastName(event)} /><br /> <br />
+                    <input type="submit"
+                        onClick={(event) => this.handleSubmit(event)} />
+                </form>
+
+                <ChildComponent name={'Tai'} age={'22'}/>
             </>
         )
     }

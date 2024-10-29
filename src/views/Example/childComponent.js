@@ -1,16 +1,22 @@
 import React from "react";
+import './Demo.scss';
 
 // Class Component (Statefull)
 class ChildComponent extends React.Component {
     state = {
         showJob: false,
-
     }
+
     handleShowHide = () => {
         this.setState({
             showJob: !this.state.showJob,
         })
     }
+
+    handleOnclickDelete = (job) => {
+        this.props.deleteJob(job)
+    }
+
     render() {
         let { arrJobs } = this.props;
         let { showJob } = this.state;
@@ -18,7 +24,7 @@ class ChildComponent extends React.Component {
             <>
                 {!showJob ?
                     <div>
-                        <button onClick={() => this.handleShowHide()}>
+                        <button className="btn-show" onClick={() => this.handleShowHide()}>
                             Show
                         </button>
                     </div>
@@ -29,7 +35,8 @@ class ChildComponent extends React.Component {
                                 arrJobs.map((item, index) => {
                                     return (
                                         <div key={item.id}>
-                                            {item.title} - {item.salary}
+                                            {item.title} - {item.salary} <></>
+                                            <button onClick={() => this.handleOnclickDelete(item)}>X</button>
                                         </div>
                                     )
                                 })

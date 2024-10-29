@@ -1,6 +1,9 @@
 import logo from './logo.svg';
 import './App.scss';
-import MyComponent from './Example/myComponent';
+// import MyComponent from './Example/myComponent';
+import ListTodo from './Todos/ListTodo';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 /*
 - 2 components: class component vs function component
@@ -13,12 +16,23 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Hello world from Reactjs (Tai Phung)
+          Simple TODO Apps with React.js (Tai)
         </p>
 
-        <MyComponent />
-        {/* <MyComponent></MyComponent> */}
+        {/* <MyComponent /> */}
+        <ListTodo />
       </header>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }

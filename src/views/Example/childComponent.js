@@ -1,43 +1,72 @@
 import React from "react";
 
+// Class Component (Statefull)
 class ChildComponent extends React.Component {
-    /*
-    JSX => return block
-    */
     state = {
-        firstName: "",
-        lastName: ""
-    }
+        showJob: false,
 
-    handleChangeFirstName = (event) => {
+    }
+    handleShowHide = () => {
         this.setState({
-            firstName: event.target.value,
+            showJob: !this.state.showJob,
         })
     }
-
-    handleChangeLastName = (event) => {
-        this.setState({
-            lastName: event.target.value,
-        })
-    }
-
-    handleSubmit = (event) => {
-        event.preventDefault();
-        console.log('>>> check data input: ', this.state)
-    }
-
     render() {
-        console.log(">>> check props: ", this.props);
-
-        let { name, age } = this.props;
+        let { arrJobs } = this.props;
+        let { showJob } = this.state;
         return (
             <>
-                <div>
-                    Child component name: {name} - {age}
-                </div>
+                {!showJob ?
+                    <div>
+                        <button onClick={() => this.handleShowHide()}>
+                            Show
+                        </button>
+                    </div>
+                    :
+                    <>
+                        <div className="job-lists">
+                            {
+                                arrJobs.map((item, index) => {
+                                    return (
+                                        <div key={item.id}>
+                                            {item.title} - {item.salary}
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                        <div>
+                            <button onClick={() => this.handleShowHide()}>
+                                Hide
+                            </button>
+                        </div>
+                    </>
+                }
             </>
         )
     }
 }
+
+// Function component (Stateless)
+// const ChildComponent = (props) => {
+//     let { arrJobs } = props;
+//     return (
+//         <>
+//             <div className="job-lists">
+//                 {
+//                     arrJobs.map((item, index) => {
+//                         if (item.salary >= 500) {
+//                             return (
+//                                 <div key={item.id}>
+//                                     {item.title} - {item.salary}$
+//                                 </div>
+//                             )
+//                         }
+//                     })
+//                 }
+//             </div>
+//         </>
+//     )
+// }
 
 export default ChildComponent;
